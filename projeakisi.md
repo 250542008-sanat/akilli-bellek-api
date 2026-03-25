@@ -327,3 +327,5 @@ Python arayüzümüzün (Frontend), C++ motorumuzu (Backend) tetiklemek ve veri 
 
 
 
+
+
