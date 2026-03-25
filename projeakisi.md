@@ -216,21 +216,20 @@ Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
 **Sorumlu:** Mustafa Şahingöz (Proje Yöneticisi)
 
 **1. Risk Analizi ve Önceliklendirme Matrisi**
-Projenin 1. haftasında kapsam tanımlama aşamasında belirlenen temel risklerin derinlemesine analizi yapılmış ve her bir potansiyel kriz durumu için "Olasılık ve Etki" (1: Düşük, 2: Orta, 3: Yüksek) puanlaması yapılarak aşağıdaki matris oluşturulmuştur:
+Projenin ilk haftasında belirlenen riskler analiz edilmiş; Olasılık ve Etki derecelerine göre (1: Düşük, 2: Orta, 3: Yüksek) aşağıdaki tablo oluşturulmuştur:
 
-| Risk Kodu | Risk Tanımı | Olasılık | Etki | Risk Skoru | Öncelik Seviyesi |
+| Risk Kodu | Risk Tanımı | Olasılık | Etki | Risk Skoru | Öncelik |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| **RSK-01** | Valgrind Analizinin Aşırı Performans Yükü (Overhead) Yaratması | 3 | 3 | 9 |  Kritik |
-| **RSK-02** | Karmaşık Terminal Verilerinin Yanlış Ayrıştırılması (Parsing Error) | 3 | 2 | 6 |  Yüksek |
-| **RSK-03** | C++ Arka Uç ve Python Ön Uç Arası İletişim Kopukluğu/Gecikmesi | 2 | 3 | 6 |  Yüksek |
-| **RSK-04** | Çapraz Platform (Windows/macOS) Uyumsuzluklarının Yaşanması | 1 | 3 | 3 |  Orta |
+| **RSK-01** | Valgrind Analizinin Sistemi Yavaşlatması (Performans Yükü) | 3 | 3 | 9 |  Kritik |
+| **RSK-02** | Terminal Verilerinin Yanlış Ayrıştırılması (Parsing Hatası) | 3 | 2 | 6 |  Yüksek |
+| **RSK-03** | C++ Arka Uç ve Python Ön Uç Arasında İletişim Gecikmesi | 2 | 3 | 6 |  Yüksek |
+| **RSK-04** | Çapraz Platform (Windows/macOS) Uyumsuzlukları | 1 | 3 | 3 |  Orta |
 
-**2. Risk Azaltma ve Yönetim Eylem Planı (Mitigation Strategies)**
-Yukarıda tespit edilen risklerin projenin ilerleyişini durdurmasını engellemek amacıyla takım üyelerine aşağıdaki teknik eylem planları atanmıştır:
+**2. Risk Çözüm ve Yönetim Planı**
+Yukarıdaki risklerin projeyi aksatmaması için aşağıdaki somut adımlar planlanmıştır:
 
-* **RSK-01 İçin Çözüm Planı (Performans):** Dinamik analiz araçlarının hedef uygulamayı yavaşlatması kaçınılmazdır. Bu yükü hafifletmek için sistem motorumuz tüm işletim sistemini değil, **sadece hedeflenen (simüle edilen) uygulamanın işlem kimliğini (PID)** izleyecek şekilde kısıtlanacaktır.
-* **RSK-02 İçin Çözüm Planı (Veri Ayrıştırma):** Valgrind'in standart dışı metin (plain text) çıktıları doğrudan Python arayüzüne beslenmeyecektir. Veri kaybını önlemek için arka uçta (C++) bu veriler evrensel **JSON formatına** dönüştürülecek, Python sadece bu yapılandırılmış JSON dosyasını okuyacaktır.
-* **RSK-03 İçin Çözüm Planı (İletişim ve Arayüz Donması):** Arka uç veri toplarken Python tabanlı kullanıcı arayüzünün (GUI) donmasını engellemek için, Python tarafında asenkron mimari veya **Multi-threading (Çoklu İş Parçacığı)** kullanılacaktır. Böylece arka planda analiz sürerken arayüz akıcı kalmaya devam edecektir.
-* **RSK-04 İçin Çözüm Planı (İşletim Sistemi Uyumu):** İlk hafta alınan karar doğrultusunda, C++ kodlarının dışarıda değil, kesinlikle izole bir **WSL2 veya Docker** konteyneri içinde çalıştırılması kuralından taviz verilmeyecektir. Bu sayede "Benim bilgisayarımda çalışıyor ama sende çalışmıyor" krizleri başlamadan bitirilecektir.
-
+* **RSK-01 Çözümü (Performans):** Analiz motorumuz tüm sistemi değil, sadece test edilen uygulamanın işlem kimliğini (PID) izleyecek şekilde kısıtlanacaktır.
+* **RSK-02 Çözümü (Veri Hatası):** C++ arka ucu, karmaşık metin çıktılarını standart **JSON** formatına çevirecek; Python sadece bu kayıpsız JSON dosyasını okuyacaktır.
+* **RSK-03 Çözümü (Arayüz Donması):** Arka planda analiz sürerken Python arayüzünün donmasını engellemek için, ön uçta Çoklu İş Parçacığı (**Multi-threading**) mimarisi kullanılacaktır.
+* **RSK-04 Çözümü (İşletim Sistemi):** C++ kodlarının dışarıda değil, tamamen izole bir **WSL2 veya Docker** ortamında çalıştırılması kuralı sıkı bir şekilde uygulanacaktır.
 
