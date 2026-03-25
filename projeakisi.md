@@ -324,6 +324,18 @@ Python arayüzümüzün (Frontend), C++ motorumuzu (Backend) tetiklemek ve veri 
 ---
 *Not: Yukarıdaki tüm mimari kararlar ve teknoloji seçimleri, RAM Kurtarıcıları ekibi olarak yaptığımız  fikir alışverişleri sonucunda projemizin ihtiyaçlarına en uygun yapı olarak ortaklaşa belirlenmiştir. Bu mimari sayesinde kodlarımız birbirine girmeyecek, C++ ve Python tam bir uyum içinde çalışacaktır.*
 
+# Proje Akışı
+
+## Hafta 1
+
+### Mustafa Şahingöz
+Detaylı Risk Analizi ve Yönetim Planı Oluşturuldu.
+
+## Hafta 1
+
+### Semanur Buhan
+Veri Tabanı ve API Tasarımı yapıldı.
+
 
 
 
