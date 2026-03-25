@@ -228,7 +228,7 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 
 **Haftalık Görev Dağılımı ve Ekip Hedefleri**
 
-**Mustafa:** Simülasyon senaryolarının mimari tasarımını yapmak, JSON tabanlı iletişim protokolünün standartlarını belirlemek ve takım içi kod çakışmalarını (Merge Conflict) yöneterek proje akışını sağlamak.
+* **Mustafa:** Simülasyon senaryolarının mimari tasarımını yapmak, JSON tabanlı iletişim protokolünün standartlarını belirlemek ve takım içi kod çakışmalarını (Merge Conflict) yöneterek proje akışını sağlamak.
 * **Yusuf (Backend):** Senaryo A ve Senaryo B'ye ait C++ simülasyon kodlarını yazmak ve Valgrind üzerinden ilk manuel testlerini gerçekleştirmek.
 * **Semanur (Altyapı):** Kurulan WSL2 ortamında yazılan simülasyon kodlarının derlenmesi (G++) ve izole ortamda çalıştırılabilirliğini denetlemek.
 * **Sümeyra (Gereksinim/Arayüz):** Elde edilecek JSON verilerinin Python tarafında hangi grafik türleriyle (Örn: Zaman-RAM tüketim grafiği) gösterileceğinin taslak UI/UX gereksinimlerini belirlemek.
