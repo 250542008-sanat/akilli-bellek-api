@@ -211,11 +211,9 @@ Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
 # 2. HAFTA ÇALIŞMALARI (12 Mart - 15 Mart 2026)
 ---
 
-## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
-
 ## 2.1 Test Mimarisi, Simülasyon Senaryoları ve Sprint Planlaması
 
-**Sorumlu:** Mustafa Şahingöz (Scrum Master / Proje Yöneticisi)
+**Sorumlu:** Mustafa Şahingöz 
 
 **1. Simülasyon ve "Uygulama Sahası" Stratejisi**
 Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc` motoru) test edilebilmesi ve yeteneklerinin kanıtlanabilmesi için dış bir projeye ihtiyaç duyulmadan kendi **"Simülasyon Ortamımız"** tasarlanmıştır. Bu kapsamda analiz motoruna "kobay" olarak verilmek üzere iki farklı C++ simülasyon uygulaması geliştirilecektir:
@@ -228,13 +226,10 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 **2. Veri Akışı ve İletişim Mimarisi Kararı**
 İzole bir Linux/WSL2 ortamında çalışan C++ analiz motorunun ürettiği verilerin, çapraz platform destekli Python arayüzüne (Frontend) aktarılabilmesi için yapılandırılmış bir veri formatı kullanılacaktır. Valgrind'den elde edilen karmaşık terminal çıktıları, arka uçta **JSON** formatına dönüştürülerek (Ayrıştırma/Parsing) Python arayüzüne iletilecek; böylece veri kaybı ve senkronizasyon sorunları önlenecektir.
 
-**3. Haftalık Görev Dağılımı ve Ekip Hedefleri**
-* **Mustafa:** Simülasyon senaryolarının mimari tasarımını yapmak, JSON tabanlı iletişim protokolünün standartlarını belirlemek ve takım içi kod çakışmalarını (Merge Conflict) yöneterek proje akışını sağlamak.
-* **Yusuf (Backend):** Senaryo A ve Senaryo B'ye ait C++ simülasyon kodlarını yazmak ve Valgrind üzerinden ilk manuel testlerini gerçekleştirmek.
-* **Semanur (Altyapı):** Kurulan WSL2 ortamında yazılan simülasyon kodlarının derlenmesi (G++) ve izole ortamda çalıştırılabilirliğini denetlemek.
-* **Sümeyra (Gereksinim/Arayüz):** Elde edilecek JSON verilerinin Python tarafında hangi grafik türleriyle (Örn: Zaman-RAM tüketim grafiği) gösterileceğinin taslak UI/UX gereksinimlerini belirlemek.
 
-**Sorumlu:** Mustafa Şahingöz (Proje Yöneticisi)
+## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
+
+**Sorumlu:** Mustafa Şahingöz 
 
 **1. Risk Analizi ve Önceliklendirme Matrisi**
 Projenin ilk haftasında belirlenen riskler analiz edilmiş; Olasılık ve Etki derecelerine göre (1: Düşük, 2: Orta, 3: Yüksek) aşağıdaki tablo oluşturulmuştur:
