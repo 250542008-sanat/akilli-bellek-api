@@ -12,7 +12,7 @@
 
 **2. Proje Kapsamı**
 
-* **Kapsam İçi:** Hedef uygulamanın Linux ortamında bellek yönetim araçlarıyla (Valgrind) çalıştırılması, anlık/periyodik bellek tüketim verilerinin toplanması ve bu verilerin Python arayüzünde anlamlı raporlara dönüştürülmesi.
+**Kapsam İçi:** Hedef uygulamanın Linux ortamında bellek yönetim araçlarıyla (Valgrind) çalıştırılması, anlık/periyodik bellek tüketim verilerinin toplanması ve bu verilerin Python arayüzünde anlamlı raporlara dönüştürülmesi.
 * **Kapsam Dışı:** Tespit edilen bellek sızıntılarının sistem tarafından otomatik olarak düzeltilmesi veya kaynak kodun değiştirilmesi (Uygulama yalnızca tespit ve raporlama yapacaktır). Ayrıca uygulamanın ilk sürümü Linux/WSL ortamına odaklanacak olup, doğrudan Windows (native) desteği kapsam dışıdır.
 
 **3. Potansiyel Zorluklar ve Risk Analizi**
@@ -227,6 +227,7 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 İzole bir Linux/WSL2 ortamında çalışan C++ analiz motorunun ürettiği verilerin, çapraz platform destekli Python arayüzüne (Frontend) aktarılabilmesi için yapılandırılmış bir veri formatı kullanılacaktır. Valgrind'den elde edilen karmaşık terminal çıktıları, arka uçta **JSON** formatına dönüştürülerek (Ayrıştırma/Parsing) Python arayüzüne iletilecek; böylece veri kaybı ve senkronizasyon sorunları önlenecektir.
 
 **Haftalık Görev Dağılımı ve Ekip Hedefleri**
+
 **Mustafa:** Simülasyon senaryolarının mimari tasarımını yapmak, JSON tabanlı iletişim protokolünün standartlarını belirlemek ve takım içi kod çakışmalarını (Merge Conflict) yöneterek proje akışını sağlamak.
 * **Yusuf (Backend):** Senaryo A ve Senaryo B'ye ait C++ simülasyon kodlarını yazmak ve Valgrind üzerinden ilk manuel testlerini gerçekleştirmek.
 * **Semanur (Altyapı):** Kurulan WSL2 ortamında yazılan simülasyon kodlarının derlenmesi (G++) ve izole ortamda çalıştırılabilirliğini denetlemek.
