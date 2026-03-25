@@ -247,7 +247,7 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 **2. Veri Akışı ve İletişim Mimarisi Kararı**
 İzole bir Linux/WSL2 ortamında çalışan C++ analiz motorunun ürettiği verilerin, çapraz platform destekli Python arayüzüne (Frontend) aktarılabilmesi için yapılandırılmış bir veri formatı kullanılacaktır. Valgrind'den elde edilen karmaşık terminal çıktıları, arka uçta **JSON** formatına dönüştürülerek (Ayrıştırma/Parsing) Python arayüzüne iletilecek; böylece veri kaybı ve senkronizasyon sorunları önlenecektir.
 
-** Haftalık Görev Dağılımı ve Ekip Hedefleri**
+**Haftalık Görev Dağılımı ve Ekip Hedefleri**
 
 * **Mustafa:** Simülasyon senaryolarının mimari tasarımını yapmak, JSON tabanlı iletişim protokolünün standartlarını belirlemek ve takım içi kod çakışmalarını (Merge Conflict) yöneterek proje akışını sağlamak.
 * **Yusuf (Backend):** Senaryo A ve Senaryo B'ye ait C++ simülasyon kodlarını yazmak ve Valgrind üzerinden ilk manuel testlerini gerçekleştirmek.
