@@ -363,7 +363,7 @@ Geçtiğimiz hafta projemizin önündeki olası riskleri ve başımıza açabile
 ### 4. Çapraz Platform Uyumsuzluğu (RSK-04)
 * **Nasıl Çözeceğiz?** Ekipte hem Mac hem Windows kullananlar olduğu için "Benim bilgisayarımda çalışıyordu, sende neden bozuldu?" sorunu yaşamamak adına, tüm geliştirme sürecimizi tamamen izole edilmiş WSL2 (Ubuntu) ortamında standartlaştıracağız.
 * **Kullanılacak Kaynaklar:** Windows Subsystem for Linux (WSL2)
-*  **Sorumlu Kişi:** Mustafa Şahingöz
+* **Sorumlu Kişi:** Mustafa Şahingöz
 * **B Planımız:** WSL2'de donanım erişimi sorunları yaşarsak, tüm sistemi Docker konteyner mimarisine taşıyarak tek bir imaj üzerinden çalıştıracağız.
 
 ### 🎯 Zaman Çizelgesi ve Ölçülebilirlik (Nasıl Test Edeceğiz?)
