@@ -257,7 +257,7 @@ Yukarıdaki risklerin projeyi aksatmaması için aşağıdaki somut adımlar pla
 
 
 
-# 🗄️ Görev: Veri Tabanı ve API Tasarımı
+# 2.3 🗄️ Görev: Veri Tabanı ve API Tasarımı
 
 **👤 Sorumlu:** Semanur Buhan
 **📅 İlgili Hafta:** Hafta 2
@@ -334,6 +334,39 @@ Detaylı Risk Analizi ve Yönetim Planı Oluşturuldu.
 
 ### Semanur Buhan
 Veri Tabanı ve API Tasarımı yapıldı.
+
+
+# 3. HAFTA ÇALIŞMALARI (15 Mart - 23 Mart 2026)
+---
+
+## 3.1 Risk Yönetim Planı Uygulama Tasarımı
+
+**Görev Sorumlusu:** Mustafa Şahingöz  
+
+Geçtiğimiz hafta projemizin önündeki olası riskleri ve başımıza açabilecekleri sorunları belirlemiştik. Bu hafta ise olarak "Peki bu riskler gerçeğe dönüşürse sahada tam olarak ne yapacağız, ve hangi araçları kullanacağız?" sorularına yanıt veren somut bir eylem planı hazırlandı. İşler ters gittiğinde devreye sokacağımız alternatif senaryolarımız (B planlarımız) ve yapmamız gerekenler aşağıdadır.
+
+### 1. Sistem ve Performans Yükü Riski (RSK-01)
+* **Nasıl Çözeceğiz?** Analiz motorumuzun tüm bilgisayarı tarayıp sistemi dondurmasını engellemek için, motoru sadece hedef uygulamanın PID'sine (İşlem Kimliğine) kilitleyeceğiz. Ayrıca verileri saniyede 100 kere değil, sistemi yormayacak şekilde 500 milisaniyelik periyotlarla çekeceğiz.
+* **Kullanılacak Kaynaklar:** Linux Procfs, CPU/RAM Profiler Araçları.
+* **B Planımız:** Eğer Valgrind aracı bu ayarlara rağmen sistemi yormaya devam ederse, Valgrind'i tamamen projeden çıkarıp çok daha hafif çalışan Linux `/proc/meminfo` dosyası üzerinden okuma yapmaya geçeceğiz.
+
+### 2. Veri Ayrıştırma (Parsing) Hataları (RSK-02)
+* **Nasıl Çözeceğiz?** Karmaşık terminal çıktılarını arayüze yollarken verilerin yolda bozulmasını önlemek için, veriyi daha C++ tarafındayken güvenli JSON formatına çevireceğiz. Python arayüzümüz de bu veriyi kabul etmeden önce mutlaka bir doğrulama (validation) süzgecinden geçirecek.
+* **Kullanılacak Kaynaklar:** C++ `nlohmann/json` kütüphanesi.
+* **B Planımız:** JSON veri akışında sürekli kopmalar veya format hataları yaşarsak, bu aracı köprüyü iptal edeceğiz. C++ arka ucumuz verileri doğrudan ortak bir SQLite veri tabanına yazacak, arayüz de veriyi oradan çekecek.
+
+### 3. İletişim Gecikmesi ve Arayüzün Donması (RSK-03)
+* **Nasıl Çözeceğiz?** Arka planda ağır bir C++ analizi dönerken kullanıcının tıkladığı arayüzün kilitlenmemesi çok kritik. Bu yüzden veri akışını FastAPI'nin asenkron (`async`) yapısı ve eşzamanlı veri aktarımı sağlayan WebSocket protokolü ile kuracağız.
+* **Kullanılacak Kaynaklar:** FastAPI, Uvicorn, Python Asyncio.
+* **B Planımız:** WebSocket mimarisi geliştirme aşamasında beklediğimizden karmaşık çıkarsa veya bağlantı düşerse, arayüzün saniyede bir API'ye düzenli istek attığı standart "HTTP Polling" (Sürekli Yoklama) sistemine döneceğiz.
+
+### 4. Çapraz Platform Uyumsuzluğu (RSK-04)
+* **Nasıl Çözeceğiz?** Ekipte hem Mac hem Windows kullananlar olduğu için "Benim bilgisayarımda çalışıyordu, sende neden bozuldu?" sorunu yaşamamak adına, tüm geliştirme sürecimizi tamamen izole edilmiş WSL2 (Ubuntu) ortamında standartlaştıracağız.
+* **Kullanılacak Kaynaklar:** Windows Subsystem for Linux (WSL2)
+* **B Planımız:** WSL2'de donanım erişimi sorunları yaşarsak, tüm sistemi Docker konteyner mimarisine taşıyarak tek bir imaj üzerinden çalıştıracağız.
+
+### 🎯 Zaman Çizelgesi ve Ölçülebilirlik (Nasıl Test Edeceğiz?)
+Bu tasarladığımız önlemlerin gerçekten işe yarayıp yaramadığını  kodlama testimizde göreceğiz.
 
 
 
