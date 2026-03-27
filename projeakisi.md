@@ -293,7 +293,6 @@ Geçmişte yapılan RAM analizlerinin özet bilgilerini tutar.
 ### Tablo: `ayarlar`
 Kullanıcının uygulama içi tercihlerini tutar.
 * `id` (Integer, Primary Key)
-* `otomatik_optimizasyon` (Boolean): Analiz sonrası temizlik otomatik yapılsın mı? (True/False)
 * `tema` (Text): Arayüz teması (Dark/Light).
 
 ---
@@ -317,9 +316,7 @@ Python arayüzümüzün (Frontend), C++ motorumuzu (Backend) tetiklemek ve veri 
 * **İstek:** `GET /api/raporlar/{rapor_id}`
 * **Açıklama:** Kullanıcı listeden bir rapora tıkladığında, ilgili id'ye ait JSON dosyasının içeriğini okur ve arayüze detaylı Valgrind dökümünü iletir.
 
-### 🧹 4. Bellek Optimizasyonu (Temizlik) Uygulama
-* **İstek:** `POST /api/optimizasyon/uygula`
-* **Açıklama:** Kullanıcı "Optimize Et" butonuna bastığında C++ tarafındaki bellek kurtarma rutinlerini tetikler.
+
 
 ---
 *Not: Yukarıdaki tüm mimari kararlar ve teknoloji seçimleri, RAM Kurtarıcıları ekibi olarak yaptığımız  fikir alışverişleri sonucunda projemizin ihtiyaçlarına en uygun yapı olarak ortaklaşa belirlenmiştir. Bu mimari sayesinde kodlarımız birbirine girmeyecek, C++ ve Python tam bir uyum içinde çalışacaktır.*
