@@ -411,6 +411,38 @@ uvicorn main:app --reload
 ## Sonuç
 Hazırlanan API tasarımı ve mock prototip sayesinde sistem bileşenleri arasındaki iletişim somut hale getirilmiştir. Endpointler gerçekten çalışmakta, istek atılabilmekte ve cevap dönmektedir.
 
+---
+
+# RAM Kurtarıcıları - Kullanıcı Arayüzü (UI) Tasarım Süreci 🛡️
+
+**Sorumlu:** Semanur Buhan 👩‍💻
+
+Bu dosya, projenin arka planında çalışan C++ ve Valgrind analiz süreçlerinin kullanıcıya sunulacağı arayüzün Figma üzerinde nasıl tasarlandığını adım adım açıklamaktadır.
+
+## ✅ Yapılan İşlemler ve Tasarım Adımları
+
+Uygulamanın arayüzü, modern masaüstü standartlarına uygun olarak iki ana ekran üzerinde kurgulanmıştır:
+
+### 1. Uygulama İskeleti ve Giriş Ekranı
+* **Pencere Yapısı:**  kırmızı, sarı ve yeşil kontrol düğmelerine sahip, gri renkli bir üst başlık çubuğu (`v1.0`) oluşturuldu. 🖥️
+* **Sol Menü (Sidebar):** Kullanıcının hızlı erişimi için "Ana Ekran", "Geçmiş Raporlar" ve "Ayarlar" butonları eklendi. Her buton uygun profesyonel ikonlarla (klasör, çark, kalkan) desteklendi. 📂
+* **Analiz Giriş Alanı:** Ekranın merkezine, analiz edilecek dosyanın adının yazılacağı beyaz bir metin kutusu yerleştirildi. Kutunun içine klavye ve mikrofon ikonları eklendi. ⌨️
+* **Başlat Butonu:** "VALGRIND ANALİZİNİ BAŞLAT 🚀" yazılı, belirgin mavi bir buton tasarlandı. Butona derinlik katması için gölge (drop shadow) efekti uygulandı.
+
+### 2. Analiz Sonuç Ekranı
+* **Görsel Veri:** Analiz sonuçlarını özetlemek için kırmızı renkli bir halka grafik (donut chart) çizildi. Grafiğin ortasına tespit edilen toplam sızıntı miktarı (16 Bayt) yazıldı. 📊
+* **Hata Raporlama:** Valgrind çıktılarının (leak logları) listeleneceği, okunabilirliği yüksek, açık gri renkli geniş bir rapor paneli eklendi. 📝
+* **Zaman Damgası:** Analizin yapıldığı tarih ve saat bilgisi başlık altına eklendi.
+
+### 3. Görsel ve Teknik Detaylar
+* **Renk Geçişi (Gradient):** Uygulamanın iç arka planına modern ve temiz bir görünüm katması için açık mavi (`DAE1F2`) ve açık mor (`EEDDEE`) tonlarında yumuşak bir renk geçişi (linear gradient) uygulandı. 🎨
+* **Hiyerarşi:** Başlıklar ve önemli metinler kalınlaştırılarak (Semibold) görsel okunabilirlik artırıldı.
+* **Kenar Yumuşatma:** Tüm buton ve kutuların köşeleri modern bir görünüm için  yuvarlatıldı.
+
+
+---
+*Bu tasarım süreci, projenin profesyonel bir son ürün haline gelmesi için kullanıcı deneyimi (UX) odaklı yürütülmüştür.*
+
 
 # Proje Akışı
 
@@ -422,5 +454,6 @@ Risk Yönetim Planı Uygulama Tasarımı yapıldı.
 ### Sümeyra Adıyaman
 API Endpoint Spesifikasyonları oluşturuldu ve mock prototip geliştirildi.
 
-
+### Semanur Buhan
+Uygulama arayüzü için prototip UI/UX wireframe tasarımı yapıldı.
 
