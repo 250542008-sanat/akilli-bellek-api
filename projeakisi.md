@@ -412,6 +412,7 @@ uvicorn main:app --reload
 Hazırlanan API tasarımı ve mock prototip sayesinde sistem bileşenleri arasındaki iletişim somut hale getirilmiştir. Endpointler gerçekten çalışmakta, istek atılabilmekte ve cevap dönmektedir.
 
 ---
+
 # RAM Kurtarıcıları - Kullanıcı Arayüzü (UI) Tasarım Süreci 🛡️
 
 **Sorumlu:** Semanur Buhan 👩‍💻
@@ -441,6 +442,7 @@ Uygulamanın arayüzü, modern masaüstü standartlarına uygun olarak iki ana e
 
 ---
 *Bu tasarım süreci, projenin profesyonel bir son ürün haline gelmesi için kullanıcı deneyimi (UX) odaklı yürütülmüştür.*
+
 
 
 # Proje Akışı
