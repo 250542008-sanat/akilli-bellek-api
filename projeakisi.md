@@ -488,6 +488,7 @@ Görev Tanımı
 Bu hafta kapsamında, backend mimarisinde nesne yönetimini optimize etmek amacıyla Object Pool (Nesne Havuzu) tasarım deseni entegre edilmiş ve C++ tarafında bellek güvenliğini sağlamak için RAII prensipleri uygulanmıştır.
 
 Yapılan Çalışmalar
+
 1-Nesne Havuzu Entegrasyonu (backend/VeriHavuzu.cpp)
 
 Gereksiz nesne oluşumunu (object instantiation) engellemek için geri dönüşümlü bir havuz yapısı kuruldu.
