@@ -491,11 +491,8 @@ Bu hafta kapsamında kullanılan veri yapıları bellek kullanımı açısından
 ### Sümeyra Adıyaman
 Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 
+**Yusuf Tuğra Deveci**
+* Uygulama genelinde gereksiz nesne oluşumunu engellemek amacıyla **Object Pool (Nesne Havuzu)** tasarım deseni backend mimarisine entegre edildi.
+* RAII prensibi kullanılarak bellek sızıntıları (memory leak) önlendi ve sistem yükü optimize edildi.
+* `arka uç` klasörüne `VeriHavuzu.h` ve `VeriHavuzu.cpp` dosyaları modüler yapıda eklendi.
 
-Yusuf Tuğra Deveci
-
-Uygulama genelinde gereksiz nesne oluşumunu engellemek amacıyla Object Pool (Nesne Havuzu) tasarım deseni backend mimarisine entegre edildi.
-
-RAII prensibi kullanılarak bellek sızıntıları (memory leak) önlendi ve sistem yükü optimize edildi.
-
-arka uç klasörüne VeriHavuzu.h ve VeriHavuzu.cpp dosyaları modüler yapıda eklendi.
