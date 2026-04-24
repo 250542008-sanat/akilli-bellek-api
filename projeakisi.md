@@ -482,6 +482,25 @@ Bu hafta kapsamında kullanılan veri yapıları bellek kullanımı açısından
 - `api/senaryo_a.py` → Sağlıklı bellek yönetimi, Valgrind'de 0 hata bekleniyor
 - `api/senaryo_b.py` → Bilinçli bellek sızıntısı, ~840 byte sızıntı bekleniyor
 
+
+4.2 👨‍💻 Yusuf Tuğra Deveci – Nesne Havuzu ve Bellek Optimizasyonu
+Görev Tanımı
+Bu hafta kapsamında, backend mimarisinde nesne yönetimini optimize etmek amacıyla Object Pool (Nesne Havuzu) tasarım deseni entegre edilmiş ve C++ tarafında bellek güvenliğini sağlamak için RAII prensipleri uygulanmıştır.
+
+Yapılan Çalışmalar
+
+1.Nesne Havuzu Entegrasyonu (backend/VeriHavuzu.cpp)
+Gereksiz nesne oluşumunu (object instantiation) engellemek için geri dönüşümlü bir havuz yapısı kuruldu.
+Sistem yükü optimize edilerek işlemci maliyeti düşürüldü.
+
+2.Bellek Güvenliği ve RAII
+Manuel bellek yönetiminden kaynaklanabilecek memory leak (bellek sızıntısı) riskleri RAII prensibiyle ortadan kaldırıldı.
+Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sisteme eklendi.
+
+3.C++ Simülasyon Testleri
+
+Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
+
 ---
 
 # Proje Akışı
