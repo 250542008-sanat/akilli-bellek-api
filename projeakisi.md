@@ -463,3 +463,30 @@ Uygulama arayüzü için prototip UX wireframe tasarımı yapıldı.
 # 4. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
 ---
 
+## 4.1 👩‍💻 Sümeyra Adıyaman – Veri Yapılarının Optimizasyonu
+
+### Görev Tanımı
+Bu hafta kapsamında kullanılan veri yapıları bellek kullanımı açısından analiz edilmiş ve optimizasyon çalışmaları yapılmıştır. Ek olarak eksik kalan C++ simülasyon kodları yazılmıştır.
+
+---
+
+### Yapılan Çalışmalar
+
+**1. Veri Yapısı Optimizasyonu (`src/api/main.py`)**
+- `sessions = {}` yapısı sınırsız büyüyebiliyordu
+- Maksimum 100 oturum tutan `OrderedDict` yapısına geçildi
+- Kapasite aşıldığında en eski oturum otomatik siliniyor
+- Bellek kullanımını anlık raporlayan yeni endpoint eklendi: `GET /api/v1/sistem/bellek`
+
+**2. C++ Simülasyon Kodları**
+- `api/senaryo_a.py` → Sağlıklı bellek yönetimi, Valgrind'de 0 hata bekleniyor
+- `api/senaryo_b.py` → Bilinçli bellek sızıntısı, ~840 byte sızıntı bekleniyor
+
+---
+
+# Proje Akışı
+
+## Hafta 4
+
+### Sümeyra Adıyaman
+Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
