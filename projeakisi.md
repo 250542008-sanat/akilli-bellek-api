@@ -517,10 +517,12 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
 
 
 5. **Teknik Onarım:** - `new[]` ile açılan diziler `delete[]` ile serbest bırakıldı.
+6. <img width="925" height="394" alt="Ekran Resmi 2026-04-25 18 05 47" src="https://github.com/user-attachments/assets/ab2a8eaf-369b-4897-9afb-19b6fddb9af5" />
+
    - Döngü içerisinde sahipsiz kalan nesneler için `delete` komutları eklendi.
    - *Dangling pointer* (sarkan işaretçi) riskine karşı `nullptr` atamaları yapıldı.
-6. **Git Yönetimi:** Uzak depodaki (remote) değişiklikler yerel kodla birleştirildi (Merge), çakışmalar çözüldü ve stabil sürüm GitHub'a fırlatıldı.
-7. **Düzeltme:** Senaryo B kısmındaki sızıntılar tespil edildi ve düzeltilmiş hali yüklendi.
+7. **Git Yönetimi:** Uzak depodaki (remote) değişiklikler yerel kodla birleştirildi (Merge), çakışmalar çözüldü ve stabil sürüm GitHub'a fırlatıldı.
+8. **Düzeltme:** Senaryo B kısmındaki sızıntılar tespil edildi ve düzeltilmiş hali yüklendi.
 
 ## Sonuç
 - **Hata Sayısı:** 0
