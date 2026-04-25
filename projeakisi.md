@@ -501,22 +501,15 @@ Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sist
 
 Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
 
+# 🛡️ RAM Kurtarıcıları - Hafta 4 Çalışma Raporu
 
-
-#  Hafta 4 Çalışma Raporu
-
-**Hazırlayan:** Mustafa Şahingöz
-
-## Görev Özeti
+## 📋 Görev Özeti
 Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryolarının entegrasyonu gerçekleştirilmiş ve sistemdeki bellek sızıntıları (memory leaks) analiz edilerek tamamen giderilmiştir.
 
-## Gerçekleştirilen İşlemler
+## 🛠️ Gerçekleştirilen İşlemler
 1. **Kod Entegrasyonu:** Yusuf'un geliştirdiği `VeriHavuzu` motoru ile Sümeyra'nın hazırladığı test senaryoları birleştirildi.
 2. **Sızıntı Analizi:** Senaryo-B üzerinde yapılan testlerde ~840 byte miktarında kritik bellek sızıntısı tespit edildi.
-
-<img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/fe152cdc-6570-466a-9c15-92999fdd5cea"/>
-
-
+3. <img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/5ec03f89-caa0-48c2-b5f5-0ef6d5d96b75" />
 
 
 
@@ -525,13 +518,15 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
    - *Dangling pointer* (sarkan işaretçi) riskine karşı `nullptr` atamaları yapıldı.
 5. **Git Yönetimi:** Uzak depodaki (remote) değişiklikler yerel kodla birleştirildi (Merge), çakışmalar çözüldü ve stabil sürüm GitHub'a fırlatıldı.
 
-## Sonuç
+## 📊 Sonuç
 - **Hata Sayısı:** 0
 - **Bellek Durumu:** "All heap blocks were freed" (Tüm bellek geri kazanıldı).
 - **Dosya Yapısı:** Orijinal testlere dokunulmadan `senaryo_b_duzeltilmis.cpp` adıyla optimize edilmiş sürüm sisteme eklendi.
 
-
+**Hazırlayan:** [Kaptan / Proje Yöneticisi]
 **Durum:** ✅ Tamamlandı
+
+
 
 ---
 
