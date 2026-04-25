@@ -1,3 +1,8 @@
+/**
+ * Yapan Kişi:Mustafa Şahingöz
+ * Bellek sızıntıları bulundu ve düzeltilmiş kod oluşturuldu.
+ */
+
 #include <iostream>
 #include <string>
 
