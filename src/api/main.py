@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from uuid import uuid4
 from datetime import datetime
+from collections import OrderedDict
+import sys
 
 app = FastAPI(
     title="Akıllı Bellek Yönetimi API",
@@ -9,7 +11,9 @@ app = FastAPI(
     version="1.0"
 )
 
-sessions = {}
+# OPTİMİZASYON: Sınırsız dict yerine maksimum 100 oturum tutan OrderedDict
+MAKS_OTURUM = 100
+sessions = OrderedDict()
 
 class AnalyzeRequest(BaseModel):
     uygulama_adi: str
@@ -24,6 +28,11 @@ def root():
 @app.post("/api/v1/analiz/baslat")
 def analiz_baslat(request: AnalyzeRequest):
     oturum_id = str(uuid4())
+
+    # Kapasite doluysa en eski oturumu sil
+    if len(sessions) >= MAKS_OTURUM:
+        sessions.popitem(last=False)
+
     sessions[oturum_id] = {
         "uygulama_adi": request.uygulama_adi,
         "durum": "devam_ediyor",
@@ -76,5 +85,18 @@ def sistem_saglik():
         "sqlite": "mock",
         "proc_fs": "mock",
         "surum": "1.0.0",
+        "zaman": datetime.now().isoformat()
+    }
+
+@app.get("/api/v1/sistem/bellek")
+def sistem_bellek():
+    # Aktif oturum sayısı ve tahmini bellek kullanımı
+    oturum_sayisi = len(sessions)
+    tahmini_bellek_byte = oturum_sayisi * 200
+    return {
+        "aktif_oturum_sayisi": oturum_sayisi,
+        "maksimum_oturum_limiti": MAKS_OTURUM,
+        "tahmini_bellek_kullanimi_byte": tahmini_bellek_byte,
+        "optimizasyon": "OrderedDict - FIFO temizleme aktif",
         "zaman": datetime.now().isoformat()
     }
