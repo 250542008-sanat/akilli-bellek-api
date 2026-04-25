@@ -532,7 +532,34 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
 
 **Durum:** ✅ Tamamlandı
 
+---
 
+## 4.4 Semanur Buhan - Bellek Yönetimi Araçları Entegrasyonu ve Teknik Raporlama
+
+##  Görev Özeti
+Proje genelinde bellek kullanımını izlemek, analiz etmek ve elde edilen verileri raporlanabilir formata getirmek amacıyla Valgrind entegrasyonu sağlandı.
+
+## Yapılan Çalışmalar
+
+1. **Otomasyon Betiği (Integration):** C++ test senaryolarını (`senaryo_b_duzeltilmis.cpp` vb.) otomatik olarak derleyen ve Valgrind üzerinden çalıştıran `valgrind_analiz.sh` betiği yazıldı. Bu sayede manuel test süreçleri tek komutla çalışabilir hale getirildi.
+2. **Raporlama Standardizasyonu:** Valgrind analiz sonuçlarının standart bir `valgrind_raporu.log` dosyasına yönlendirilmesi sağlandı. Bu altyapı, ileride tasarladığımız arayüzün (UI) veri okuyacağı ana motoru oluşturmaktadır.
+3. **Sistem Doğrulaması:** Ekip arkadaşlarımın Nesne Havuzu (Object Pool) ve RAII kullanarak sunduğu çözümler, yazdığım bu otomasyon motoruyla test edildi.
+
+**🔍 Teknik Analiz Raporu (Valgrind Results):**
+Analiz edilen dosya: `tests/senaryo_b_duzeltilmis.cpp`
+
+| Kategori | Sonuç |
+| :--- | :--- |
+| **Hata Sayısı (Errors)** | 0 (Sıfır Hata) |
+| **Kesin Kayıp (Definitely Lost)** | 0 bytes in 0 blocks |
+| **Toplam Bellek Kullanımı** | All heap blocks were freed (Tüm bellek geri kazanıldı) |
+| **Durum** | ✅ Güvenli / Stabil |
+
+## Sonuç
+ - Valgrind entegrasyonu başarıyla tamamlandı.
+ - Yapılan testler sonucunda sistemin bellek sızıntılarından tamamen arındırıldığı teknik olarak raporlanmıştır.
+
+**Durum:** ✅ Tamamlandı.
 
 ---
 
@@ -551,3 +578,9 @@ Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 ### Mustafa Şahingöz
 Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeler yapıldı. Performans testleri ile doğrulandı.
 
+### Semanur Buhan
+Proje genelinde bellek kullanımını otomatize etmek ve analiz sonuçlarını standart bir formata dönüştürmek amacıyla Valgrind entegrasyonu sağlandı.
+
+* Test süreçlerini hızlandırmak için C++ senaryolarını otomatik derleyip test eden `valgrind_analiz.sh` scripti yazıldı.
+* Analiz çıktıları için `.log` tabanlı standart bir raporlama altyapısı kuruldu.
+* Geliştirilen otomasyon motoru üzerinden yapılan son doğrulamalarda, sistemde **0 bayt sızıntı** ve **0 hata** olduğu teknik olarak raporlanarak projenin bellek güvenliği onaylandı.
