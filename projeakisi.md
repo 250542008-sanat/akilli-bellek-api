@@ -502,6 +502,39 @@ Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sist
 Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
 
 ---
+## 4.3 Mustafa Şahingöz - Bellek Sızıntısı Analizi ve Düzeltilmesi
+
+##  Görev Özeti
+Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryolarının entegrasyonu gerçekleştirilmiş ve sistemdeki bellek sızıntıları (memory leaks) analiz edilerek tamamen giderilmiştir.
+
+## Gerçekleştirilen İşlemler
+1. **Kod Entegrasyonu:** Yusuf'un geliştirdiği `VeriHavuzu` motoru ile Sümeyra'nın hazırladığı test senaryoları birleştirildi.
+2. <img width="544" height="55" alt="Ekran Resmi 2026-04-25 17 49 55" src="https://github.com/user-attachments/assets/16193443-97b0-49d6-944c-2ca4376f8acf" />
+
+3. **Sızıntı Analizi:** Senaryo-B üzerinde yapılan testlerde ~840 byte miktarında kritik bellek sızıntısı tespit edildi.
+4. <img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/5ec03f89-caa0-48c2-b5f5-0ef6d5d96b75" />
+
+
+
+5. **Teknik Onarım:** - `new[]` ile açılan diziler `delete[]` ile serbest bırakıldı.
+6. <img width="925" height="394" alt="Ekran Resmi 2026-04-25 18 05 47" src="https://github.com/user-attachments/assets/ab2a8eaf-369b-4897-9afb-19b6fddb9af5" />
+
+   - Döngü içerisinde sahipsiz kalan nesneler için `delete` komutları eklendi.
+   - *Dangling pointer* (sarkan işaretçi) riskine karşı `nullptr` atamaları yapıldı.
+7. **Git Yönetimi:** Uzak depodaki (remote) değişiklikler yerel kodla birleştirildi (Merge), çakışmalar çözüldü ve stabil sürüm GitHub'a fırlatıldı.
+8. **Düzeltme:** Senaryo B kısmındaki sızıntılar tespil edildi ve düzeltilmiş hali yüklendi.
+
+## Sonuç
+- **Hata Sayısı:** 0
+- **Bellek Durumu:** "All heap blocks were freed" (Tüm bellek geri kazanıldı).
+- **Dosya Yapısı:** Orijinal testlere dokunulmadan `senaryo_b_duzeltilmis.cpp` adıyla optimize edilmiş sürüm sisteme eklendi.
+
+
+**Durum:** ✅ Tamamlandı
+
+
+
+---
 
 # Proje Akışı
 
@@ -514,4 +547,7 @@ Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 * Uygulama genelinde gereksiz nesne oluşumunu engellemek amacıyla **Object Pool (Nesne Havuzu)** tasarım deseni backend mimarisine entegre edildi.
 * RAII prensibi kullanılarak bellek sızıntıları (memory leak) önlendi ve sistem yükü optimize edildi.
 * `arka uç` klasörüne `VeriHavuzu.h` ve `VeriHavuzu.cpp` dosyaları modüler yapıda eklendi.
+
+### Mustafa Şahingöz
+Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeler yapıldı. Performans testleri ile doğrulandı.
 
