@@ -514,7 +514,8 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
 1. **Kod Entegrasyonu:** Yusuf'un geliştirdiği `VeriHavuzu` motoru ile Sümeyra'nın hazırladığı test senaryoları birleştirildi.
 2. **Sızıntı Analizi:** Senaryo-B üzerinde yapılan testlerde ~840 byte miktarında kritik bellek sızıntısı tespit edildi.
 
-<img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/fe152cdc-6570-466a-9c15-92999fdd5cea" />
+<img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/fe152cdc-6570-466a-9c15-92999fdd5cea"/>
+
 
 
 
