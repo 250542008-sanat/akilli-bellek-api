@@ -462,4 +462,36 @@ Uygulama arayüzü için prototip UX wireframe tasarımı yapıldı.
 
 # 4. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
 ---
+## 4.5  Aylin Akagündüz – Büyük Boyutlu Verilerin İşlenmesinde Bellek Optimizasyonu
+
+### Görev Tanımı
+
+Bu hafta kapsamında, büyük boyutlu verilerin (resim buffer'ları ve video akışları) işlenmesi sırasında bellek kullanımının nasıl optimize edileceği araştırılmış ve projemize uygun teknikler belirlenmiştir.
+
+---
+
+### Uygulanan Optimizasyon Teknikleri
+
+**1. Sıkıştırma (zlib / DEFLATE)**
+Valgrind çıktıları ve JSON raporları diske yazılmadan önce sıkıştırılır. Ham boyutu %40–65 oranında azaltır, kayıpsız çalışır.
+
+**2. Parçalı İşleme (Stream Processing)**
+Büyük veri tüm buffer'a yüklenmek yerine parça parça okunur. Bellekte aynı anda yalnızca tek bir parça bulunduğundan RAM kullanımı sabit kalır.
+
+**3. Bellek Havuzu (Memory Pool)**
+Yusuf'un bu hafta teslim ettiği `VeriHavuzu` modülü büyük veri nesneleri için de kullanılacak; sürekli `malloc/free` döngüsünden kaçınılır.
+
+**4. Tembel Yükleme (Lazy Loading)**
+Geçmiş raporlar listesinde yalnızca özet bilgi tutulur; tam Valgrind verisi yalnızca kullanıcı raporu açtığında yüklenir. Semanur'un `detay_json_yolu` mimarisiyle uyumludur.
+
+---
+
+### Sonuç
+
+Belirlenen dört teknik birbirini tamamlayıcı niteliktedir ve mevcut mimariyi bozmadan projeye entegre edilecektir. Bu strateji aynı zamanda Hafta 2'de tanımlanan RSK-01 ve RSK-02 risklerine karşı ek güvence sağlamaktadır.
+
+
+### Aylin Akagündüz
+Büyük boyutlu verilerin bellek optimizasyonu araştırıldı, uygulama stratejisi belirlendi.
+
 
