@@ -653,6 +653,57 @@ Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kul
 **Güncellenen dosya:** `src/api/main.py`
 
 ---
+## 5.2 Mustafa Şahingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
+
+##  Giriş
+Bu rapor, "Akıllı Bellek Yönetimi" projesinin 5. haftası kapsamında; sistem performansını artırmak, bellek sızıntılarını önlemek ve kaynak kullanımını optimize etmek amacıyla incelenen tekniklerin analizini sunar.
+
+---
+
+##  Araştırılan Teknikler
+
+### 1. Object Pooling (Nesne Havuzlama)
+**Tanım:** Sık kullanılan nesnelerin her seferinde yeniden oluşturulması yerine, önceden ayrılmış bir bellek havuzunda saklanıp ihtiyaç duyulduğunda tekrar kullanılmasıdır.
+
+*   **Avantajları:** `new` ve `delete` gibi sistem çağrılarının maliyetini minimize eder. Bellek parçalanmasını (fragmentation) engeller.
+*   **Dezavantajları:** Kullanılmayan nesneler havuzda yer kapladığı için başlangıçta sabit bir bellek yükü oluşturur.
+*   **Değerlendirme:** Yüksek frekanslı analiz kayıtları için uygulanması önerilir.
+
+### 2. RAII ve Akıllı İşaretçiler (Smart Pointers)
+**Tanım:** Bellek yönetiminin nesne ömrüne bağlanmasıdır. C++ standart kütüphanesindeki `std::unique_ptr` ve `std::shared_ptr` kullanılarak manuel bellek yönetiminden kaçınılır.
+
+*   **Avantajları:** Bellek sızıntılarını (memory leaks) ve geçersiz işaretçi (dangling pointer) hatalarını yazılım seviyesinde önler.
+*   **Dezavantajları:** `shared_ptr` kullanımı, atomik referans sayacı nedeniyle çok düşük bir performans kaybı yaratabilir.
+*   **Değerlendirme:** Projenin genel mimarisi ve güvenlik standartları için zorunludur.
+
+### 3. Data Locality (Veri Yerelliği)
+**Tanım:** Verilerin bellekte birbirine yakın adreslerde tutularak CPU önbellek (Cache) hit oranının artırılmasıdır.
+
+*   **Avantajları:** Bellek erişim hızını önemli ölçüde artırır ve işlemci verimini maksimize eder.
+*   **Dezavantajları:** Veri yapılarının (örneğin linked-list yerine array kullanımı) daha katı tasarlanmasını gerektirir.
+*   **Değerlendirme:** Büyük veri setleri üzerinde yapılan analizlerde kritik öneme sahiptir.
+
+---
+
+##  Teknik Karşılaştırma Tablosu
+
+| Teknik | Performans Kazancı | Uygulama Zorluğu | Güvenlik Etkisi |
+| :--- | :---: | :---: | :---: |
+| **Object Pooling** | ⭐⭐⭐⭐⭐ | Orta | Orta |
+| **Smart Pointers** | ⭐⭐⭐ | Düşük | ⭐⭐⭐⭐⭐ |
+| **Data Locality** | ⭐⭐⭐⭐⭐ | Yüksek | Orta |
+
+---
+
+## Proje Uygulama Planı ve Kararlar
+Yapılan analizler sonucunda Hafta 5 ve sonrası için şu kararlar alınmıştır:
+
+1.  **Güvenlik:** Projedeki tüm dinamik bellek tahsisleri `std::unique_ptr` yapısına geçirilecek.
+2.  **Hız:** Analiz sonuçlarını tutan sınıflar için bir `Object Pool` katmanı prototip olarak geliştirilecek.
+3.  **Analiz:** Valgrind çıktıları ile optimizasyon öncesi ve sonrası bellek grafiği karşılaştırılacak.
+
+---
+
 
 # Proje Akışı
 
@@ -661,6 +712,10 @@ Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kul
 ### Sümeyra Adıyaman
 Profilleme aracı (`tracemalloc`) API'ye entegre edildi. Bellek kullanımını anlık raporlayan `GET /api/v1/sistem/profil` endpoint'i eklendi.
 
+
+### Mustafa Şahingöz
+Farklı bellek optimizasyonu tekniklerini araştırıldı ve projemizde kullanılabilecek potansiyel yöntemleri belirlendi. Bulduğunuz yöntemlerin avantaj ve dezavantajlarını analiz edildi.
+=======
 
 
 # 6. HAFTA ÇALIŞMALARI (2 Mayıs - 9 Mayıs 2026)
@@ -703,3 +758,4 @@ API performans testleri başarıyla tamamlanmıştır. Sistem yük altında stab
 
 ### Sümeyra Adıyaman
 API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçlar raporlandı.
+
