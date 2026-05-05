@@ -653,7 +653,7 @@ Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kul
 **Güncellenen dosya:** `src/api/main.py`
 
 ---
-## 5.2 Mustafa ŞAhingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
+## 5.2 Mustafa Şahingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
 
 ##  Giriş
 Bu rapor, "Akıllı Bellek Yönetimi" projesinin 5. haftası kapsamında; sistem performansını artırmak, bellek sızıntılarını önlemek ve kaynak kullanımını optimize etmek amacıyla incelenen tekniklerin analizini sunar.
