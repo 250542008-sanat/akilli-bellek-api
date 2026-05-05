@@ -715,7 +715,7 @@ Profilleme aracı (`tracemalloc`) API'ye entegre edildi. Bellek kullanımını a
 
 ### Mustafa Şahingöz
 Farklı bellek optimizasyonu tekniklerini araştırıldı ve projemizde kullanılabilecek potansiyel yöntemleri belirlendi. Bulduğunuz yöntemlerin avantaj ve dezavantajlarını analiz edildi.
-=======
+
 
 
 # 6. HAFTA ÇALIŞMALARI (2 Mayıs - 9 Mayıs 2026)
