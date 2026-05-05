@@ -3,7 +3,10 @@ from pydantic import BaseModel
 from uuid import uuid4
 from datetime import datetime
 from collections import OrderedDict
-import sys
+import tracemalloc
+
+# Profilleme başlat
+tracemalloc.start()
 
 app = FastAPI(
     title="Akıllı Bellek Yönetimi API",
@@ -28,11 +31,8 @@ def root():
 @app.post("/api/v1/analiz/baslat")
 def analiz_baslat(request: AnalyzeRequest):
     oturum_id = str(uuid4())
-
-    # Kapasite doluysa en eski oturumu sil
     if len(sessions) >= MAKS_OTURUM:
         sessions.popitem(last=False)
-
     sessions[oturum_id] = {
         "uygulama_adi": request.uygulama_adi,
         "durum": "devam_ediyor",
@@ -90,7 +90,6 @@ def sistem_saglik():
 
 @app.get("/api/v1/sistem/bellek")
 def sistem_bellek():
-    # Aktif oturum sayısı ve tahmini bellek kullanımı
     oturum_sayisi = len(sessions)
     tahmini_bellek_byte = oturum_sayisi * 200
     return {
@@ -98,5 +97,32 @@ def sistem_bellek():
         "maksimum_oturum_limiti": MAKS_OTURUM,
         "tahmini_bellek_kullanimi_byte": tahmini_bellek_byte,
         "optimizasyon": "OrderedDict - FIFO temizleme aktif",
+        "zaman": datetime.now().isoformat()
+    }
+
+@app.get("/api/v1/sistem/profil")
+def sistem_profil():
+    # Anlık bellek kullanımı
+    anlik, zirve = tracemalloc.get_traced_memory()
+
+    # En çok bellek tüketen 5 nokta
+    snapshot = tracemalloc.take_snapshot()
+    istatistikler = snapshot.statistics("lineno")[:5]
+
+    en_cok_tuketenler = []
+    for istat in istatistikler:
+        en_cok_tuketenler.append({
+            "dosya": str(istat.traceback[0].filename).split("\\")[-1],
+            "satir": istat.traceback[0].lineno,
+            "bellek_byte": istat.size,
+            "nesne_sayisi": istat.count
+        })
+
+    return {
+        "anlik_bellek_byte": anlik,
+        "anlik_bellek_kb": round(anlik / 1024, 2),
+        "zirve_bellek_byte": zirve,
+        "zirve_bellek_kb": round(zirve / 1024, 2),
+        "en_cok_tuketenler": en_cok_tuketenler,
         "zaman": datetime.now().isoformat()
     }
