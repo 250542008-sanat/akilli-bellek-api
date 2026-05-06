@@ -101,14 +101,10 @@ def sistem_bellek():
 
 @app.get("/api/v1/sistem/profil")
 def sistem_profil():
-hafta4-sumeyraadiyaman
     # Anlık bellek kullanımı
     anlik, zirve = tracemalloc.get_traced_memory()
 
     # En çok bellek tüketen 5 nokta
-=======
-    anlik, zirve = tracemalloc.get_traced_memory()
- main
     snapshot = tracemalloc.take_snapshot()
     istatistikler = snapshot.statistics("lineno")[:5]
 
