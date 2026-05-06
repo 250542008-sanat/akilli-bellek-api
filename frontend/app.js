@@ -1,39 +1,59 @@
-async function analiziBaslat() {
-    // 1. Kullanıcının yazdığı uygulama adını al
-    const uygulamaAdi = document.getElementById("uygulama-adi").value || "Uygulama";
-    
-    // 2. Ekranlar arası geçiş yap
+// 1. Backend Adresini Tanımla
+const API_URL = "https://akilli-bellek-yonetimi.onrender.com";
+
+// MENÜ EKRANLARI ARASI GEÇİŞ YAPMA FONKSİYONU
+function menuyuAc(ekranId) {
     document.getElementById("ekran-1").style.display = "none";
-    document.getElementById("ekran-2").style.display = "block";
-    
-    // 3. Başlık ve tarihi güncelle
-    document.getElementById("sonuc-baslik").innerText = "Analiz Sonucu: " + uygulamaAdi;
-    const bugun = new Date();
-    document.getElementById("sonuc-tarih").innerText = "Tarih: " + bugun.toLocaleString('tr-TR');
+    document.getElementById("ekran-2").style.display = "none";
+    document.getElementById("ekran-3").style.display = "none";
+    document.getElementById("ekran-4").style.display = "none";
 
-    try {
-        // Sümeyra'nın backend'inden veriyi çekiyoruz
-        const response = await fetch("http://127.0.0.1:8000/api/v1/sistem/profil");
-        const data = await response.json();
-
-        // Gelen veriyi (anlık kullanım) kırmızı halkanın içine ve uyarılara yazıyoruz
-        document.getElementById("sizinti-miktari").innerText = data.anlik_kullanim_kb;
-        
-        document.getElementById("uyari-1").innerText = `[UYARI] ${data.anlik_kullanim_kb} KB sızıntı tespit edildi - main.cpp (Satır 45)`;
-        document.getElementById("uyari-2").innerText = `[BİLGİ] Zirve kullanım: ${data.zirve_kullanim_kb} KB - utils.cpp (Satır 112)`;
-
-    } catch (error) {
-        // Eğer backend çalışmıyorsa örnek Valgrind tasarımı görünsün (Tasarım testi için)
-        document.getElementById("sizinti-miktari").innerText = "16";
-        document.getElementById("uyari-1").innerText = "[UYARI] 12 Bayt sızıntı tespit edildi - main.cpp (Satır 45)";
-        document.getElementById("uyari-2").innerText = "[UYARI] 4 Bayt dolaylı sızıntı - utils.cpp (Satır 112)";
-        console.log("Backend bağlantı hatası, sahte veri gösteriliyor.");
-    }
+    document.getElementById(ekranId).style.display = "block";
 }
 
-// Geri dön butonuna basılınca ilk ekrana dön
-function geriDon() {
-    document.getElementById("ekran-2").style.display = "none";
-    document.getElementById("ekran-1").style.display = "block";
-    document.getElementById("uygulama-adi").value = "";
+// ANALİZİ BAŞLATMA FONKSİYONU (GERÇEK VERSİYON)
+async function analiziBaslat() {
+    const uygulamaAdi = document.getElementById("uygulama-adi").value || "Uygulama";
+
+    // Analiz ekranına geç
+    menuyuAc("ekran-2");
+
+    document.getElementById("sonuc-baslik").innerText = "Analiz Sonucu: " + uygulamaAdi;
+    const bugun = new Date();
+    document.getElementById("sonuc-tarıh").innerText = "Tarih: " + bugun.toLocaleString('tr-TR');
+
+    // 1. Aşama: Yükleniyor Animasyonu ve API Çağrısı
+    document.getElementById("sizinti-miktari").innerText = "...";
+    document.getElementById("uyari-1").innerText = "⚙️ Bulut sunucusuna bağlanılıyor...";
+    document.getElementById("uyari-2").innerText = "🔍 Valgrind ve C++ motoru hazırlanıyor...";
+
+    try {
+        // RENDER'DAKİ BACKEND'E İSTEK AT
+        const response = await fetch(`${API_URL}/api/v1/analiz/baslat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ uygulama_adi: uygulamaAdi })
+        });
+
+        const data = await response.json();
+
+        // 2. Aşama: Gelen Verileri Ekrana Yazdır
+        if (response.ok) {
+            // Backend'den (main.py) gelen verileri kullanıyoruz
+            document.getElementById("sizinti-miktari").innerText = "8.2"; // Mock verimiz 8.2 MB
+            document.getElementById("uyari-1").innerText = "✅ [BAŞARILI] " + data.mesaj;
+            document.getElementById("uyari-2").innerText = "ℹ️ Oturum ID: " + data.oturum_id;
+        } else {
+            throw new Error("Sunucu hatası");
+        }
+
+    } catch (error) {
+        // Hata Durumu
+        document.getElementById("sizinti-miktari").innerText = "HATA";
+        document.getElementById("uyari-1").innerText = "🔴 Sunucuya bağlanılamadı!";
+        document.getElementById("uyari-2").innerText = "Lütfen Render sunucusunun 'Live' olduğundan emin olun.";
+        console.error("Bağlantı Hatası:", error);
+    }
 }
