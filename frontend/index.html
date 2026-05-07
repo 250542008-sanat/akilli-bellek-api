@@ -3,151 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAM Kurtarıcıları</title>
+    <title>RAM Kurtarıcıları - v1.0</title>
     <style>
-        /* Genel Ayarlar ve Arka Plan Gradyanı */
-        body { 
-            margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(to bottom, #eef2f5, #9b8cbf, #473261); 
-            height: 100vh; display: flex; overflow: hidden;
+        body {
+            margin: 0; font-family: 'Segoe UI', sans-serif; display: flex;
+            height: 100vh; overflow: hidden;
+            background: linear-gradient(180deg, #E6E9F0 0%, #D1D9E6 50%, #764ba2 100%);
         }
-        
-        /* Sol Menü (Sidebar) */
-        .sidebar { 
-            width: 200px; background: rgba(240, 240, 245, 0.8); 
-            padding: 30px 20px; display: flex; flex-direction: column; gap: 20px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        /* Sidebar Tasarımı */
+        .sidebar {
+            width: 260px; background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px); padding: 30px 20px;
+            border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;
         }
-        .sidebar h2 { margin: 0 0 30px 0; font-size: 18px; color: #333; display: flex; align-items: center; gap: 5px; }
-        .menu-item { font-size: 14px; font-weight: bold; color: #555; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 5px; border-radius: 8px; transition: 0.2s;}
-        .menu-item:hover { color: #000; background: rgba(0,0,0,0.05); }
+        .sidebar h1 { font-size: 1.3rem; margin-bottom: 40px; color: #2c3e50; }
+        .nav-item {
+            padding: 15px; margin-bottom: 8px; cursor: pointer; border-radius: 10px;
+            transition: 0.3s; color: #444; font-weight: 500; display: flex; align-items: center;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.4); }
+        .nav-item.active { background: rgba(255,255,255,0.6); font-weight: bold; }
 
-        /* Ana İçerik Alanı */
-        .main-content { 
-            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-        }
+        /* İçerik Alanı */
+        .main-content { flex: 1; position: relative; display: flex; justify-content: center; align-items: center; }
+        .page { display: none; width: 100%; max-width: 600px; text-align: center; }
+        .page.active { display: block; }
 
-        h1 { font-size: 22px; color: #111; margin-bottom: 30px; }
-
-        /* Ekran 1: Analiz Başlatma */
-        #ekran-1 { text-align: center; display: block; }
-        .input-group { 
-            background: white; border-radius: 25px; padding: 10px 20px; 
-            display: flex; align-items: center; width: 400px; margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        /* Analiz Elemanları */
+        input {
+            width: 80%; padding: 15px 25px; border-radius: 35px; border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 25px; font-size: 16px; outline: none;
         }
-        .input-group input { border: none; outline: none; flex: 1; font-size: 14px; }
-        .baslat-btn { 
-            background: linear-gradient(to right, #6b8dd6, #8e37d7); color: white; 
-            border: none; padding: 15px 40px; border-radius: 25px; font-weight: bold; 
-            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        .btn {
+            background: #5c6bc0; color: white; border: none; padding: 12px 40px;
+            border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        .baslat-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .btn:hover { background: #3f51b5; transform: scale(1.05); }
 
-        /* Ekran 2: Sonuç Ekranı */
-        #ekran-2 { text-align: center; display: none; }
-        .tarih { color: #555; font-size: 12px; margin-bottom: 30px; }
-        .grafik-halka {
-            width: 120px; height: 120px; border-radius: 50%; border: 20px solid #cc0000; margin: 0 auto 30px auto;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background-color: #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        /* Kırmızı Halka (PDF'deki Gibi) */
+        .gauge {
+            width: 140px; height: 140px; border: 12px solid #d32f2f; border-radius: 50%;
+            margin: 30px auto; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .grafik-deger { font-size: 24px; font-weight: bold; color: #111; line-height: 1; }
-        .grafik-etiket { font-size: 12px; color: #555; }
-
-        /* Ekran 3 ve 4 için Ortak Kutular */
-        .uyari-kutusu { 
-            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
-            border-radius: 15px; padding: 20px; width: 450px; text-align: left;
-            border: 1px solid rgba(255,255,255,0.3); margin: 0 auto;
+        .gauge b { font-size: 32px; color: #333; }
+        .warning-box {
+            background: rgba(0, 0, 0, 0.3); color: white; padding: 25px;
+            border-radius: 15px; text-align: left; font-size: 14px; line-height: 1.6; margin-top: 20px;
         }
-        .uyari-satir { font-size: 14px; color: #333; margin-bottom: 15px; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px;}
-        .uyari-satir:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
-        
-        /* Ekran 3: Geçmiş Raporlar */
-        #ekran-3 { text-align: center; display: none; width: 100%;}
-        
-        /* Ekran 4: Ayarlar */
-        #ekran-4 { text-align: center; display: none; width: 100%;}
-        .ayar-etiket { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-
-        /* Geri Dön Butonu */
-        .geri-btn { margin-top: 20px; background: transparent; border: 1px solid #333; padding: 8px 20px; border-radius: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <!-- Sol Menü -->
-    <nav class="sidebar">
-        <h2>RAM Kurtarıcıları 🛡️</h2>
-        <!-- Menülere tıklanınca menuyuAc fonksiyonu çalışacak -->
-        <div class="menu-item" onclick="menuyuAc('ekran-1')">📄 Ana Ekran</div>
-        <div class="menu-item" onclick="menuyuAc('ekran-3')">📁 Geçmiş Raporlar</div>
-        <div class="menu-item" onclick="menuyuAc('ekran-4')">⚙️ Ayarlar</div>
-    </nav>
+    <div class="sidebar">
+        <h1>RAM Kurtarıcıları🛡️</h1>
+        <div class="nav-item active" onclick="sayfaDegistir('analiz', this)">🏠 Ana Ekran</div>
+        <div class="nav-item" onclick="sayfaDegistir('raporlar', this)">📊 Geçmiş Raporlar</div>
+        <div class="nav-item" onclick="sayfaDegistir('ayarlar', this)">⚙️ Ayarlar</div>
+    </div>
 
-    <!-- Ana İçerik -->
-    <main class="main-content">
-        
-        <!-- EKRAN 1: Analiz Girdisi -->
-        <div id="ekran-1">
-            <h1>Yeni Bellek Analizi</h1>
-            <div class="input-group">
-                <input type="text" id="uygulama-adi" placeholder="Uygulama adını girin: (örn: chrome.exe)">
-                <span>⚙️</span>
+    <div class="main-content">
+        <div id="page-analiz" class="page active">
+            <div id="ekran-giris">
+                <h2>Yeni Bellek Analizi</h2>
+                <input type="text" id="app-name" placeholder="Uygulama adı girin: (örn: chrome.exe)">
+                <br>
+                <button class="btn" onclick="analiziBaslat()">VALGRIND ANALİZİNİ BAŞLAT</button>
             </div>
-            <button class="baslat-btn" onclick="analiziBaslat()">VALGRIND ANALİZİNİ BAŞLAT</button>
-        </div>
-
-        <!-- EKRAN 2: Analiz Sonucu -->
-        <div id="ekran-2">
-            <h1 id="sonuc-baslik">Analiz Sonucu: chrome.exe</h1>
-            <div class="tarih" id="sonuc-tarih">Tarih: Bekleniyor...</div>
-            
-            <div class="grafik-halka">
-                <div class="grafik-deger" id="sizinti-miktari">--</div>
-                <div class="grafik-etiket">Bayt Sızıntı</div>
-            </div>
-
-            <div class="uyari-kutusu">
-                <div class="uyari-satir" id="uyari-1" style="border:none;">[UYARI] Veri yükleniyor...</div>
-                <div class="uyari-satir" id="uyari-2" style="border:none;">Lütfen bekleyin...</div>
-            </div>
-
-            <button class="geri-btn" onclick="menuyuAc('ekran-1')">Yeni Analiz Yap</button>
-        </div>
-
-        <!-- EKRAN 3: Geçmiş Raporlar -->
-        <div id="ekran-3">
-            <h1>Geçmiş Valgrind Raporları</h1>
-            <div class="uyari-kutusu">
-                <div class="uyari-satir">🔴 <strong>chrome.exe</strong> - 16 Bayt Sızıntı (06.05.2026)</div>
-                <div class="uyari-satir">🟢 <strong>hesap_makinesi.out</strong> - 0 Bayt Sızıntı (04.05.2026)</div>
-                <div class="uyari-satir">🔴 <strong>test_senaryosu_a.exe</strong> - 128 Bayt Sızıntı (02.05.2026)</div>
-                <div class="uyari-satir">🟢 <strong>sistem_cekirdegi.out</strong> - 0 Bayt Sızıntı (01.05.2026)</div>
+            <div id="ekran-sonuc" style="display: none;">
+                <h2 id="result-title">Analiz Sonucu</h2>
+                <p id="result-date" style="opacity: 0.6;">Tarih: Bekleniyor...</p>
+                <div class="gauge">
+                    <b id="leak-value">--</b>
+                    <small>Bayt Sızıntı</small>
+                </div>
+                <div class="warning-box" id="warning-text">⚙️ Sunucuya bağlanılıyor...</div>
+                <br>
+                <button class="btn" onclick="location.reload()">Yeni Analiz Yap</button>
             </div>
         </div>
 
-        <!-- EKRAN 4: Ayarlar -->
-        <div id="ekran-4">
-            <h1>Sistem Ayarları</h1>
-            <div class="uyari-kutusu">
-                <div class="uyari-satir">
-                    <label class="ayar-etiket"><input type="checkbox" checked> Otomatik Valgrind Taraması Yap</label>
-                </div>
-                <div class="uyari-satir">
-                    <label class="ayar-etiket"><input type="checkbox" checked> Sızıntı Bulunursa Sesli Uyarı Ver</label>
-                </div>
-                <div class="uyari-satir">
-                    <label class="ayar-etiket"><input type="checkbox"> Detaylı Log Kaydı Tut (main.cpp vb.)</label>
-                </div>
-                <div class="uyari-satir">
-                    <label class="ayar-etiket"><input type="checkbox" disabled> Koyu Tema (Çok Yakında)</label>
-                </div>
-            </div>
+        <div id="page-raporlar" class="page">
+            <h2 style="color: #2c3e50;">Geçmiş Raporlar</h2>
+            <div id="rapor-listesi" class="warning-box">Yükleniyor...</div>
         </div>
 
-    </main>
+        <div id="page-ayarlar" class="page">
+            <h2 style="color: #2c3e50;">Sistem Ayarları</h2>
+            <div class="warning-box">
+                <b>Backend Durumu:</b> Bağlı (Render) ✅<br>
+                <b>Mod:</b> Simülasyon v1.0<br>
+                <b>Geliştirici:</b> RAM Kurtarıcıları Ekibi
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
