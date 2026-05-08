@@ -1,39 +1,34 @@
 import random
-from fastapi import FastAPI
-from pydantic import BaseModel
-import uuid
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+import uuid
 
 app = FastAPI()
 
-# Vercel'den ve arayüzden gelen isteklere kapıyı açıyoruz (CORS Ayarı)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Güvenlik kapısını tamamen açar
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class AnalyzeRequest(BaseModel):
-    uygulama_adi: str
-    pid: int
-    profilleme_modu: str
-    sizinti_esigi: int
-
 @app.post("/analiz/baslat")
-async def analiz_baslat(request: AnalyzeRequest):
+async def analiz_baslat(request: Request):
+    # Gelen veriyi ham olarak alıyoruz, böylece 422 hatası vermeyecek
+    data = await request.json()
+    uygulama = data.get("uygulama_adi", "Bilinmeyen")
+    
     oturum_id = str(uuid.uuid4())
-    # Her seferinde farklı gelsin diye 10.0 ile 50.0 arası sayı
     yeni_sizinti = round(random.uniform(10.0, 50.0), 1)
 
     return {
         "durum": "baslatildi",
         "oturum_id": oturum_id,
         "sizinti_degeri": yeni_sizinti,
-        "mesaj": f"{request.uygulama_adi} icin analiz baslatildi"
+        "mesaj": f"{uygulama} icin analiz baslatildi"
     }
 
 @app.get("/")
 async def root():
-    return {"mesaj": "Akilli Bellek Yonetimi API Calisiyor!"}
+    return {"mesaj": "API Calisiyor!"}
