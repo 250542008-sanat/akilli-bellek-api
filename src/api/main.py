@@ -21,7 +21,7 @@ class AnalyzeRequest(BaseModel):
     profilleme_modu: str
     sizinti_esigi: int
 
-@app.post("/api/v1/analiz/baslat")
+@app.post("/analiz/baslat")
 async def analiz_baslat(request: AnalyzeRequest):
     oturum_id = str(uuid.uuid4())
     # Her seferinde farklı gelsin diye 10.0 ile 50.0 arası sayı
