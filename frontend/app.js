@@ -1,6 +1,6 @@
 'use strict';
 
-const API_BASE = "akilli-bellek-api-production.up.railway.app";
+const API_BASE = "https://akilli-bellek-api-production.up.railway.app";
 const MAX_POINTS = 40;
 
 const dom = {
